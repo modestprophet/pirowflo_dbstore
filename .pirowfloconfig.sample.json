@@ -1,0 +1,4 @@
+{
+  "current_user_name": "user",
+  "db_url": "postgres://dbuser:password@localhost:5432/gator?sslmode=disable"
+}
