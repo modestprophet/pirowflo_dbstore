@@ -10,7 +10,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type Waterrower struct {
+type FitnessWaterrower struct {
 	ID                uuid.UUID
 	CreatedAt         time.Time
 	StrokeRate        int32

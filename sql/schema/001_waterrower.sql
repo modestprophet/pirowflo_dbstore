@@ -1,5 +1,7 @@
 -- +goose Up
-CREATE TABLE waterrower (
+CREATE SCHEMA fitness;
+
+CREATE TABLE fitness.waterrower (
     id UUID PRIMARY KEY,
     created_at TIMESTAMP NOT NULL,
     stroke_rate INTEGER NOT NULL,
@@ -16,4 +18,5 @@ CREATE TABLE waterrower (
 );
 
 -- +goose Down
-DROP TABLE users;
+DROP TABLE fitness.waterrower;
+DROP SCHEMA fitness;

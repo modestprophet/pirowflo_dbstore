@@ -1,5 +1,5 @@
 -- name: SaveRowerData :one
-INSERT INTO waterrower (id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime)
+INSERT INTO fitness.waterrower (id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime)
 VALUES (
     $1,
     $2,

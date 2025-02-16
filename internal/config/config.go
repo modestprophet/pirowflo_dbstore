@@ -7,16 +7,16 @@ import (
 	"path/filepath"
 )
 
-const configFileName = ".gatorconfig.json"
+const configFileName = ".pirowfloconfig.json"
 
 type Config struct {
-	CurrentUserName string `json:"current_user_name"`
-	DBURL           string `json:"db_url"`
-}
-
-func (c *Config) SetUser(name string) error {
-	c.CurrentUserName = name
-	return write(*c)
+	DBURL        string `json:"db_url"`
+	MqServerURL  string `json:"mq_server_url"`
+	MqClientID   string `json:"mq_client_id"`
+	MqDeviceName string `json:"mq_device_name"`
+	MqUser       string `json:"mq_user"`
+	MqPassword   string `json:"mq_password"`
+	MqTopic      string `json:"mq_topic"`
 }
 
 func Read() (*Config, error) {
@@ -48,18 +48,4 @@ func getConfigFilePath() (string, error) {
 		return "", fmt.Errorf("error obtaining user home directory path: %w", err)
 	}
 	return filepath.Join(home, configFileName), nil
-}
-
-func write(cfg Config) error {
-	path, err := getConfigFilePath()
-	if err != nil {
-		return fmt.Errorf("failed to get config filepath: %w", err)
-	}
-
-	data, err := json.MarshalIndent(cfg, "", "  ")
-	if err != nil {
-		return fmt.Errorf("failed to Marshall cfg when writing: %w", err)
-	}
-
-	return os.WriteFile(path, data, 0600)
 }

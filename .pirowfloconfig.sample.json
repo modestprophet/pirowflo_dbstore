@@ -1,4 +1,9 @@
 {
-  "current_user_name": "user",
-  "db_url": "postgres://dbuser:password@localhost:5432/gator?sslmode=disable"
+  "db_url": "postgres://dbuser:password@localhost:5432/database?sslmode=disable",
+  "mq_server_url": "tcp://10.0.20.26:1883",
+  "mq_client_id": "pirowflo",
+  "mq_device_name": "Waterrower data subscriber",
+  "mq_user": "MQ_USER",
+  "mq_password": "MQ_PASSWORD",
+  "mq_topic": "waterrower/data"
 }

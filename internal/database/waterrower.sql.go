@@ -13,7 +13,7 @@ import (
 )
 
 const saveRowerData = `-- name: SaveRowerData :one
-INSERT INTO waterrower (id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime)
+INSERT INTO fitness.waterrower (id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime)
 VALUES (
     $1,
     $2,
@@ -48,7 +48,7 @@ type SaveRowerDataParams struct {
 	Elapsedtime       int32
 }
 
-func (q *Queries) SaveRowerData(ctx context.Context, arg SaveRowerDataParams) (Waterrower, error) {
+func (q *Queries) SaveRowerData(ctx context.Context, arg SaveRowerDataParams) (FitnessWaterrower, error) {
 	row := q.db.QueryRowContext(ctx, saveRowerData,
 		arg.ID,
 		arg.CreatedAt,
@@ -64,7 +64,7 @@ func (q *Queries) SaveRowerData(ctx context.Context, arg SaveRowerDataParams) (W
 		arg.HeartRate,
 		arg.Elapsedtime,
 	)
-	var i Waterrower
+	var i FitnessWaterrower
 	err := row.Scan(
 		&i.ID,
 		&i.CreatedAt,

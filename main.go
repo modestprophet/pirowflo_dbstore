@@ -39,10 +39,7 @@ func main() {
 		handlers: make(map[string]func(*state, command) error),
 	}
 
-	cmds.register("login", handlerLogin)
-	cmds.register("register", handlerRegister)
-	cmds.register("reset", handlerReset)
-	cmds.register("users", handlerUsers)
+	cmds.register("start", startDataStorage)
 
 	if len(os.Args) < 2 {
 		fmt.Println("Error: command required")
