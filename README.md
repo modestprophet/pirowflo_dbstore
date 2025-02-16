@@ -1,5 +1,5 @@
 # pirowflo_mqtt
-
+A simple MQTT subscriber service that processes [pirowflo_mqtt](https://github.com/modestprophet/pirowflo_mqtt) events and stores them to DB.  This projet is based on RabbitMQ and Postgres.  It should work with other MQ server types but will require customization to work with other database types.  
 
 #### Installation
 Install golang
