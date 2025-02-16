@@ -1,0 +1,14 @@
+[Unit]
+Description=PiRowFlo Database Store Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=user
+ExecStart=/bin/sh -c 'exec $(go env GOPATH)/bin/pirowflo_dbstore start'
+
+[Install]
+WantedBy=multi-user.target
