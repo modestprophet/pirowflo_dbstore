@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -69,6 +70,12 @@ func parseMessage(payload []byte) (rowerMessage, error) {
 func saveRowerData(s *state, msg rowerMessage) {
 	id := uuid.New()
 	now := time.Now()
+	workoutUUID, err := uuid.Parse(msg.WorkoutID)
+	if err != nil {
+		fmt.Println("not a valid uuid:  %w", msg.WorkoutID)
+		return
+	}
+
 	rower_data := database.SaveRowerDataParams{
 		ID:                id,
 		CreatedAt:         now,
@@ -83,6 +90,8 @@ func saveRowerData(s *state, msg rowerMessage) {
 		TotalKcalMin:      int32(msg.TotalKcalMin),
 		HeartRate:         int32(msg.HeartRate),
 		Elapsedtime:       int32(msg.Elapsedtime),
+		Timestamp:         sql.NullTime{Time: msg.Timestamp, Valid: true},
+		WorkoutID:         uuid.NullUUID{UUID: workoutUUID, Valid: true},
 	}
 
 	if _, err := s.db.SaveRowerData(context.Background(), rower_data); err != nil {

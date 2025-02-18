@@ -7,13 +7,14 @@ package database
 
 import (
 	"context"
+	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
 )
 
 const saveRowerData = `-- name: SaveRowerData :one
-INSERT INTO fitness.waterrower (id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime)
+INSERT INTO fitness.waterrower (id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime, timestamp, workout_id)
 VALUES (
     $1,
     $2,
@@ -27,9 +28,11 @@ VALUES (
     $10,
     $11,
     $12,
-    $13
+    $13,
+    $14,
+    $15
 )
-RETURNING id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime
+RETURNING id, created_at, stroke_rate, total_strokes, total_distance_m, instantaneous_pace, speed, watts, total_kcal, total_kcal_hour, total_kcal_min, heart_rate, elapsedtime, timestamp, workout_id
 `
 
 type SaveRowerDataParams struct {
@@ -46,6 +49,8 @@ type SaveRowerDataParams struct {
 	TotalKcalMin      int32
 	HeartRate         int32
 	Elapsedtime       int32
+	Timestamp         sql.NullTime
+	WorkoutID         uuid.NullUUID
 }
 
 func (q *Queries) SaveRowerData(ctx context.Context, arg SaveRowerDataParams) (FitnessWaterrower, error) {
@@ -63,6 +68,8 @@ func (q *Queries) SaveRowerData(ctx context.Context, arg SaveRowerDataParams) (F
 		arg.TotalKcalMin,
 		arg.HeartRate,
 		arg.Elapsedtime,
+		arg.Timestamp,
+		arg.WorkoutID,
 	)
 	var i FitnessWaterrower
 	err := row.Scan(
@@ -79,6 +86,8 @@ func (q *Queries) SaveRowerData(ctx context.Context, arg SaveRowerDataParams) (F
 		&i.TotalKcalMin,
 		&i.HeartRate,
 		&i.Elapsedtime,
+		&i.Timestamp,
+		&i.WorkoutID,
 	)
 	return i, err
 }

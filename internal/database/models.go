@@ -5,6 +5,7 @@
 package database
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
@@ -24,4 +25,6 @@ type FitnessWaterrower struct {
 	TotalKcalMin      int32
 	HeartRate         int32
 	Elapsedtime       int32
+	Timestamp         sql.NullTime
+	WorkoutID         uuid.NullUUID
 }

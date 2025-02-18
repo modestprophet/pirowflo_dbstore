@@ -10,17 +10,19 @@ import (
 )
 
 type rowerMessage struct {
-	StrokeRate        int     `json:"stroke_rate"`
-	TotalStrokes      int     `json:"total_strokes"`
-	TotalDistanceM    int     `json:"total_distance_m"`
-	InstantaneousPace float64 `json:"instantaneous pace"`
-	Speed             int     `json:"speed"`
-	Watts             int     `json:"watts"`
-	TotalKcal         float64 `json:"total_kcal"`
-	TotalKcalHour     int     `json:"total_kcal_hour"`
-	TotalKcalMin      int     `json:"total_kcal_min"`
-	HeartRate         int     `json:"heart_rate"`
-	Elapsedtime       int     `json:"elapsedtime"`
+	StrokeRate        int       `json:"stroke_rate"`
+	TotalStrokes      int       `json:"total_strokes"`
+	TotalDistanceM    int       `json:"total_distance_m"`
+	InstantaneousPace int       `json:"instantaneous pace"`
+	Speed             int       `json:"speed"`
+	Watts             int       `json:"watts"`
+	TotalKcal         int       `json:"total_kcal"`
+	TotalKcalHour     int       `json:"total_kcal_hour"`
+	TotalKcalMin      int       `json:"total_kcal_min"`
+	HeartRate         int       `json:"heart_rate"`
+	Elapsedtime       int       `json:"elapsedtime"`
+	Timestamp         time.Time `json:"timestamp"`
+	WorkoutID         string    `json:"workout_id"`
 }
 
 type MQTTClient struct {
