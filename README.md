@@ -10,7 +10,7 @@ sudo apt install golang
 
 Install pirowflo_dbstore with the user that will own the systemctl service
 ```bash
-go install github.com/modestprophet/pirowflo_dbstore@latest
+go install github.com/modestprophet/pirowflo_dbstore@v1.0.2
 ```
 
 
