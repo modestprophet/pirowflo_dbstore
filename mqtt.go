@@ -13,10 +13,10 @@ type rowerMessage struct {
 	StrokeRate        int       `json:"stroke_rate"`
 	TotalStrokes      int       `json:"total_strokes"`
 	TotalDistanceM    int       `json:"total_distance_m"`
-	InstantaneousPace int       `json:"instantaneous pace"`
+	InstantaneousPace float64   `json:"instantaneous pace"`
 	Speed             int       `json:"speed"`
 	Watts             int       `json:"watts"`
-	TotalKcal         int       `json:"total_kcal"`
+	TotalKcal         float64   `json:"total_kcal"`
 	TotalKcalHour     int       `json:"total_kcal_hour"`
 	TotalKcalMin      int       `json:"total_kcal_min"`
 	HeartRate         int       `json:"heart_rate"`
