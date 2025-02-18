@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=user
-ExecStart=/bin/sh -c 'exec $(go env GOPATH)/bin/pirowflo_dbstore start'
+ExecStart=/home/user/go/bin/pirowflo_dbstore start
 
 [Install]
 WantedBy=multi-user.target

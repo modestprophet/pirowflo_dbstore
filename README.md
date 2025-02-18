@@ -33,6 +33,12 @@ Failed to read config: failed to create default config: config not found. please
 
 
 #### Service setup
+Figure out where pirowflo_dbstore was installed
+```bash
+user@your_server:~$ which pirowflo_dbstore
+/home/user/go/bin/pirowflo_dbstore
+```
+
 Create a .service file
 ```bash
 sudo vim /etc/systemd/system/pirowflo-dbstore.service
@@ -50,7 +56,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=user
-ExecStart=/bin/sh -c 'exec $(go env GOPATH)/bin/pirowflo_dbstore start'
+ExecStart=/home/user/go/bin/pirowflo_dbstore start
 
 [Install]
 WantedBy=multi-user.target

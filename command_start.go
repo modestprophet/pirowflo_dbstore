@@ -51,6 +51,7 @@ func processMessages(s *state, messageCh <-chan []byte) {
 	for payload := range messageCh {
 		msg, err := parseMessage(payload)
 		if err != nil {
+			fmt.Println("error processing message: %w", err)
 			continue
 		}
 		saveRowerData(s, msg)
