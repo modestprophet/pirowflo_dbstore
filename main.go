@@ -40,6 +40,7 @@ func main() {
 	}
 
 	cmds.register("start", startDataStorage)
+	cmds.register("backlog", commandBacklog)
 
 	if len(os.Args) < 2 {
 		fmt.Println("Error: command required")
