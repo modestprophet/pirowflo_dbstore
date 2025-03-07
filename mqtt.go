@@ -41,11 +41,30 @@ func NewMQTTClient(cfg *config.Config) (*MQTTClient, error) {
 
 	// Set up reconnection logic
 	opts.SetAutoReconnect(true)
-	opts.SetMaxReconnectInterval(time.Second * 30)
+	opts.SetMaxReconnectInterval(time.Hour)
 
 	// Set up connection lost handler
 	opts.SetConnectionLostHandler(func(client MQTT.Client, err error) {
 		log.Printf("Connection lost: %v", err)
+		go func() {
+			retryInterval := time.Minute // Start with 1 minute
+			maxRetryInterval := time.Hour
+			for {
+				time.Sleep(retryInterval)
+				log.Printf("Attempting to reconnect...")
+				if token := client.Connect(); token.Wait() && token.Error() != nil {
+					log.Printf("Reconnect failed: %v", token.Error())
+					// Increase interval with exponential backoff
+					retryInterval = time.Duration(float64(retryInterval) * 1.5)
+					if retryInterval > maxRetryInterval {
+						retryInterval = maxRetryInterval
+					}
+				} else {
+					log.Printf("Reconnected successfully!")
+					return
+				}
+			}
+		}()
 	})
 
 	client := MQTT.NewClient(opts)
